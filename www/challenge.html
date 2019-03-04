@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+
+  <title>Gaming | collegium</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../css/home.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../css/animate.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../css/fancycard.css" media="screen,projection" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css'>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="collegium">
+  <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="../js/init.js"></script>
+  <script type="text/javascript" src="../js/player.js"></script>
+  <script type="text/javascript" src="../js/subscriptions.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
+
+  <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC6GRrWQ0v-xzvfHg32xgTP9fxSZB9Skb8",
+      authDomain: "collegium-a3676.firebaseapp.com",
+      databaseURL: "https://collegium-a3676.firebaseio.com",
+      projectId: "collegium-a3676",
+      storageBucket: "collegium-a3676.appspot.com",
+      messagingSenderId: "852316993941"
+    };
+    firebase.initializeApp(config);
+    const settings = {
+      timestampsInSnapshots: true
+    };
+    firebase.firestore().settings(settings);
+    var db = firebase.firestore();
+  </script>
+  <style>
+    html {
+      overflow-x: hidden;
+
+    }
+
+    svg {
+      padding: 5vw;
+      width: 40vw;
+    }
+
+    svg>* {
+      fill: #fff;
+      stroke: #fff;
+      stroke-width: 0.85px;
+    }
+
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    .containerFake {
+      /* display: flex; */
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* height: 100%; */
+      width: 100%;
+    }
+
+    .containerFake .row {
+      margin: 0 auto;
+    }
+
+    .clash-card {
+      background: white;
+      width: 300px;
+      height: 500px;
+      display: inline-block;
+      margin: auto;
+      border-radius: 19px;
+      position: relative;
+      text-align: center;
+      box-shadow: -1px 15px 30px -12px black;
+      z-index: 9999;
+    }
+
+
+
+    .clash-card__image--fortnite {
+      background: url('https://progameguides.com/wp-content/uploads/2018/05/fortnite-1920x1080-wallpaper-truckn-oasis.jpg');
+    }
+
+    .clash-card__image--apex {
+      background: url('https://cdn2-www.gamerevolution.com/assets/uploads/2019/02/apex-legends-level-cap-e1549466521879.jpg');
+    }
+
+    .clash-card__image--smash {
+      background: url('https://cdn3.dualshockers.com/wp-content/uploads/2018/11/super-smash-bros-ultimate-adventure-mode-world-of-light-feature-ds1-1340x1340.jpg');
+    }
+
+    .clash-card__image--goblin {
+      background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin-bg.jpg');
+      img {
+        width: 370px;
+        position: absolute;
+        top: -21px;
+        left: -37px;
+      }
+    }
+
+    .clash-card__image--wizard {
+      background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard-bg.jpg');
+      img {
+        width: 345px;
+        position: absolute;
+        top: -28px;
+        left: -10px;
+      }
+    }
+
+    .clash-card__level {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .clash-card__level--barbarian {
+      color: $barbarian;
+    }
+
+    .clash-card__level--archer {
+      color: $archer;
+    }
+
+    .clash-card__level--giant {
+      color: $giant;
+    }
+
+    .clash-card__level--goblin {
+      color: $goblin;
+    }
+
+    .clash-card__level--wizard {
+      color: $wizard;
+    }
+
+    .clash-card__unit-name {
+      font-size: 30px;
+      color: black;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .clash-card__unit-description {
+      padding: 20px;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .clash-card__unit-stats--barbarian {
+      background: $barbarian;
+
+      .one-third {
+        border-right: 1px solid #BD7C2F;
+      }
+    }
+
+    .clash-card__unit-stats--archer {
+      background: $archer;
+
+      .one-third {
+        border-right: 1px solid #D04976;
+      }
+    }
+
+    .clash-card__unit-stats--giant {
+      background: $giant;
+
+      .one-third {
+        border-right: 1px solid darken($giant, 8%);
+      }
+    }
+
+    .clash-card__unit-stats--goblin {
+      background: $goblin;
+
+      .one-third {
+        border-right: 1px solid darken($goblin, 6%);
+      }
+    }
+
+    .clash-card__unit-stats--wizard {
+      background: $wizard;
+
+      .one-third {
+        border-right: 1px solid darken($wizard, 6%);
+      }
+    }
+
+    .clash-card__unit-stats {
+
+      color: white;
+      font-weight: 700;
+      border-bottom-left-radius: $border-radius-size;
+      border-bottom-right-radius: $border-radius-size;
+
+      .one-third {
+        width: 33%;
+        float: left;
+        padding: 20px 15px;
+      }
+
+      sup {
+        position: absolute;
+        bottom: 4px;
+        font-size: 45%;
+        margin-left: 2px;
+      }
+
+      .stat {
+        position: relative;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .stat-value {
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+      .no-border {
+        border-right: none;
+      }
+    }
+
+    .clearfix:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+
+    /*  Next Css Shit*/
+
+    .blog-slider {
+      width: 95%;
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+      padding: 25px;
+      border-radius: 25px;
+      height: 400px;
+      transition: all .3s;
+    }
+
+    @media screen and (max-width: 992px) {
+      .blog-slider {
+        max-width: 680px;
+        height: 400px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider {
+        min-height: 500px;
+        height: auto;
+        margin: 180px auto;
+      }
+    }
+
+    @media screen and (max-height: 500px) and (min-width: 992px) {
+      .blog-slider {
+        height: 350px;
+      }
+    }
+
+    .blog-slider__item {
+      display: flex;
+      align-items: center;
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__item {
+        flex-direction: column;
+      }
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__img img {
+      opacity: 1;
+      transition-delay: .3s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>* {
+      opacity: 1;
+      transform: none;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(1) {
+      transition-delay: 0.3s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(2) {
+      transition-delay: 0.4s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(3) {
+      transition-delay: 0.5s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(4) {
+      transition-delay: 0.6s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(5) {
+      transition-delay: 0.7s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(6) {
+      transition-delay: 0.8s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(7) {
+      transition-delay: 0.9s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(8) {
+      transition-delay: 1s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(9) {
+      transition-delay: 1.1s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(10) {
+      transition-delay: 1.2s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(11) {
+      transition-delay: 1.3s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(12) {
+      transition-delay: 1.4s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(13) {
+      transition-delay: 1.5s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(14) {
+      transition-delay: 1.6s;
+    }
+
+    .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(15) {
+      transition-delay: 1.7s;
+    }
+
+    .blog-slider__img {
+      width: 300px;
+      flex-shrink: 0;
+      height: 300px;
+      background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+      box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
+      border-radius: 20px;
+      transform: translateX(-80px);
+      overflow: hidden;
+    }
+
+    .blog-slider__img:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%); */
+      border-radius: 20px;
+      opacity: 0.8;
+    }
+
+    .blog-slider__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      border-radius: 20px;
+      transition: all .3s;
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__img {
+        transform: translateY(-50%);
+        width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .blog-slider__img {
+        width: 95%;
+      }
+    }
+
+    @media screen and (max-height: 500px) and (min-width: 992px) {
+      .blog-slider__img {
+        height: 270px;
+      }
+    }
+
+    .blog-slider__content {
+      padding-right: 25px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__content {
+        margin-top: -80px;
+        text-align: center;
+        padding: 0 30px;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .blog-slider__content {
+        padding: 0;
+      }
+    }
+
+    .blog-slider__content>* {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all .4s;
+    }
+
+    .blog-slider__code {
+      color: #7b7992;
+      margin-bottom: 15px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .blog-slider__text {
+      color: #4e4a67;
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      line-height: 1.0em;
+    }
+
+    .blog-slider__button {
+      display: inline-flex;
+      background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+      padding: 15px 35px;
+      border-radius: 50px;
+      color: #fff;
+      box-shadow: 0px 14px 80px rgba(252, 56, 56, 0.4);
+      text-decoration: none;
+      font-weight: 500;
+      justify-content: center;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__img {
+        transform: translateY(-50%);
+        width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .blog-slider__img {
+        width: 95%;
+      }
+    }
+
+    @media screen and (max-height: 500px) and (min-width: 992px) {
+      .blog-slider__img {
+        height: 270px;
+      }
+    }
+
+    .blog-slider__content {
+      padding-right: 25px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__content {
+        margin-top: -80px;
+        text-align: center;
+        padding: 0 30px;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .blog-slider__content {
+        padding: 0;
+      }
+    }
+
+    .blog-slider__content>* {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all .4s;
+    }
+
+    .blog-slider__code {
+      color: #7b7992;
+      margin-bottom: 15px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .blog-slider__title {
+      font-size: 40px;
+      font-weight: 900;
+      color: #0d0925;
+      margin-bottom: 20px;
+    }
+
+
+
+    .blog-slider__button {
+      display: inline-flex;
+      background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+      padding: 15px 35px;
+      border-radius: 50px;
+      color: #fff;
+      box-shadow: 0px 14px 80px rgba(252, 56, 56, 0.4);
+      text-decoration: none;
+      font-weight: 500;
+      justify-content: center;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    @media screen and (max-width: 576px) {
+      .blog-slider__button {
+        width: 100%;
+      }
+    }
+
+    .blog-slider .swiper-container-horizontal>.swiper-pagination-bullets,
+    .blog-slider .swiper-pagination-custom,
+    .blog-slider .swiper-pagination-fraction {
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+    }
+
+    .blog-slider__pagination {
+      position: absolute;
+      z-index: 21;
+      right: 20px;
+      width: 11px !important;
+      text-align: center;
+      left: auto !important;
+      top: 50%;
+      bottom: auto !important;
+      transform: translateY(-50%);
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__pagination {
+        transform: translateX(-50%);
+        left: 50% !important;
+        top: 205px;
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+      margin: 8px 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0 5px;
+      }
+    }
+
+    .blog-slider__pagination .swiper-pagination-bullet {
+      width: 11px;
+      height: 11px;
+      display: block;
+      border-radius: 10px;
+      background: #062744;
+      opacity: 0.2;
+      transition: all .3s;
+    }
+
+    .blog-slider__pagination .swiper-pagination-bullet-active {
+      opacity: 1;
+      background: #fd3838;
+      height: 30px;
+      box-shadow: 0px 0px 20px rgba(252, 56, 56, 0.3);
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-slider__pagination .swiper-pagination-bullet-active {
+        height: 11px;
+        width: 30px;
+      }
+    }
+  </style>
+</head>
+
+<ul id="slide-out" class="sidenav sidenav-fixed center " style="background-color: #121321; width: 80px;"><br>
+  <li><a href="gaming.html" class="tooltipped" data-position="right" data-tooltip="Go Home"><i class="material-icons small white-text" style="font-size: 25px; margin-left: -8px;">home</i></a></li>
+  <li class="active" style="background-color: #141526;"><a href="challenge.html" class="tooltipped" data-position="right" data-tooltip="Challenge Lobby"><i class="material-icons small white-text" style="font-size: 25px; margin-left: -8px;">videogame_asset</i></a></li>
+  <li><a href="eventPage.html" class="tooltipped" data-position="right" data-tooltip="Events"><i class="material-icons small white-text" style="font-size: 25px; margin-left: -8px;">event</i></a></li>
+</ul>
+<nav class="transparent z-depth-0">
+  <div class="nav-wrapper black-text">
+    <a href="#" class="brand-logo left " style="padding-left: 10%;"><span class="white-text text-lighten-2" style="font-weight: 900; font-size: 35px;"><b>collegium</b></span></a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li class="z-depth-0"><a href="#" id="name"></a></li>
+      <li class="z-depth-0"><a href="#" id="points"></a></li>
+      <li class="z-depth-0"><a href="#" id="tierPoints"></a></li>
+      <li class="z-depth-0"><a href="#" id="tier"></a></li>
+      <li style="background-color: #232f42"><a class="waves-effect waves-light " onclick="signOut(); ">Signout</a></li>
+
+    </ul>
+  </div>
+</nav>
+
+<body class="" onload="loadAllStreamers()" style="background-color: #1A1B25;">
+  <section class="hide-on-med-and-down ">
+    <div class="row contianerFake" style="margin-top: -9%;">
+      <div class="blog-slider">
+        <div class="blog-slider__wrp swiper-wrapper">
+          <div class="blog-slider__item swiper-slide">
+            <div class="blog-slider__img">
+              <img src="https://images.unsplash.com/photo-1533236897111-3e94666b2edf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" alt="">
+            </div>
+            <div class="blog-slider__content">
+              <div class="blog-slider__title">Challenge Lobby</div>
+              <div class="blog-slider__text">Welcome to the Challenge Lobby. <br><br>Find players and challenge them for <br>Tier Points.</div>
+              <!-- <a href="#tournaments" class="blog-slider__button">Start Challenging</a> -->
+              <div class="input-field col s12 container">
+                <input placeholder="" id="challengeSearch" type="text" class="validate">
+                <label for="challengeSearch">Name of person you'd like to challenge</label>
+              </div>
+              <!-- <div id="foundPlayer"></div> -->
+              <ul class="collection" id="foundPlayer">
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="blog-slider__pagination"></div>
+      </div>
+    </div>
+    <div class="containerFake container " style="margin-top: 35%; margin-left: 10%;">
+      <h1 class="white-text container center-align" style="font-weight: 900; font-size: 50px;" id="">Your Challenges</h1>
+      <ul class="collection containerFake collapsible" style="margin-top: 8%" id="challengeSection">
+
+      </ul>
+    </div>
+
+  </section>
+  <section class="hide-on-med-and-up">
+    <div class="row contianerFake">
+      <div class="blog-slider">
+        <div class="blog-slider__wrp swiper-wrapper">
+          <div class="blog-slider__item swiper-slide">
+            <div class="blog-slider__img">
+              <img src="https://images.unsplash.com/photo-1533236897111-3e94666b2edf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" alt="">
+            </div>
+            <div class="blog-slider__content">
+              <div class="blog-slider__title">Challenge Lobby</div>
+              <div class="blog-slider__text">Welcome to the Challenge Lobby. <br><br>Find players and challenge them for <br>Tier Points.</div>
+              <!-- <a href="#tournaments" class="blog-slider__button">Start Challenging</a> -->
+              <div class="input-field col s12 container">
+                <input placeholder="" id="challengeSearch" type="text" class="validate">
+                <label for="challengeSearch">Name of person you'd like to challenge</label>
+              </div>
+              <!-- <div id="foundPlayer"></div> -->
+              <ul class="collection" id="foundPlayer">
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="blog-slider__pagination"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Modal Structure -->
+  <!-- <div id="modal1" class="modal" style="min-height: 800px;">
+  <div class="modal-content">
+    <h4>Pick Time and Date</h4>
+    <div class="input-field col s12 container">
+      <input type="text" class="datepicker" id="date">
+      <label for="date">Pick Date</label>
+    </div>
+
+  </div>
+</div> -->
+</body>
+
+<script>
+  var myPoints;
+  var myEmail;
+  var pointsRemaining;
+
+  function loadAllStreamers() {
+    console.log("running");
+    $('#confirmFortnite').hide();
+    $('#allSetFortnite').hide();
+    $('#confirmApex').hide();
+    $('#allSetApex').hide();
+    $('#confirmSmash').hide();
+    $('#allSetSmash').hide();
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log(user.email);
+        myEmail = user.email;
+        db.collection("gamers").doc(user.email).get().then(function(doc) {
+          if (doc.exists) {
+            console.log("Document data:", doc.data());
+            $('#name').append(doc.data().first_name + ' ' + doc.data().last_name);
+            $('#points').append(doc.data().points + ' CPTs');
+            $('#tierPoints').append(doc.data().tierPoints + ' Tier Pts');
+
+            var tierPoints = doc.data().tierPoints + doc.data().points;
+            var tier;
+            if (tierPoints < 500) {
+              tier = "bronze";
+            } else if (tierPoints < 1000) {
+              tier = "silver";
+            }
+            $('#tier').append(tier.toUpperCase() + ' Tier');
+            $('#tierTitle').append(tier.toUpperCase() + ' Tournaments');
+
+            myPoints = doc.data().points;
+
+            for (var i = 0; i < doc.data().challenges.length; i++) {
+              var card1 =
+                '<li class="collection-item avatar white-text valign-wrapper" style="background-color: #171821; border-color: #000;"><img src="http://pngimg.com/uploads/pokemon/pokemon_PNG14.png" alt="" class="circle"><span class="title" style="font-weight: 900; font-size: 25px;"> Play <span style="  text-decoration: underline;">Smash</span> with ' +
+                doc.data().challenges[i].challengerName + '</span> &nbsp at &nbsp <span style="font-size: 20px; text-decoration: underline;">' + doc.data().challenges[i].time +
+                '</span> &nbsp on &nbsp <span style="text-decoration: underline; font-size: 20px;">' + doc.data().challenges[i].date +
+                '</span><div class="secondary-content valign-wrapper"><a href="#!" class="purple darken-4 waves-effect waves-light btn">Accept</a>&nbsp &nbsp <a href="#!" class="waves-effect waves-light btn grey darken-4">Decline</a></div></li>';
+              $('#challengeSection').append(card1);
+              // $('#acceptedChallenge').hide();
+
+            }
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        }).catch(function(error) {
+          console.log("Error getting document:", error);
+        });
+      } else {
+        // No user is signed in.
+      }
+    });
+
+    var swiper = new Swiper('.blog-slider', {
+      spaceBetween: 30,
+      effect: 'fade',
+      loop: false,
+      mousewheel: {
+        invert: false,
+      },
+      // autoHeight: true,
+      pagination: {
+        el: '.blog-slider__pagination',
+        clickable: true,
+      }
+    });
+  }
+
+  function challengeAccept() {
+    $('#acceptedChallenge').show();
+  }
+  $("#challengeSearch")
+    .keyup(function() {
+      var value = $(this).val();
+      // $( "p" ).text( value );
+      console.log(value);
+      db.collection("gamers").where("full_name", "==", value)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            var chip =
+              '<li class="collection-item avatar z-depth-5"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="" class="circle"><span class="title" style="font-weight: 900; font-size: 20px;">' +
+              doc.data().full_name + '</span><p>' + doc.data().tierPoints + ' Tier Points<br>' + doc.data().tier +
+              ' Tier</p><a style="border-radius: 15px;" class="secondary-content z-depth-5 btn waves-effect waves-light red datepicker" onclick="challengeButton();">Challenge</a> </li>';
+            $('#foundPlayer').append(chip);
+          });
+        })
+        .catch(function(error) {
+          console.log("Error getting documents: ", error);
+        });
+    })
+    .keyup();
+
+  function challengeButton() {
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+  }
+</script>
+<script type="text/javascript" src="../js/materialize.min.js">
+</script>
+<script>
+  // var scene,
+  //   camera,
+  //   renderer,
+  //   containerFake,
+  //   aspect,
+  //   fov,
+  //   plane,
+  //   far,
+  //   mouseX,
+  //   mouseY,
+  //   windowHalfX,
+  //   windowHalfY,
+  //   geometry,
+  //   starStuff,
+  //   materialOptions,
+  //   stars;
+  //
+  // init();
+  // animate();
+  //
+  // function init() {
+  //   containerFake = document.createElement('div');
+  //   document.body.appendChild(containerFake);
+  //
+  //   mouseX = 0;
+  //   mouseY = 0;
+  //
+  //   aspect = window.innerWidth / window.innerHeight;
+  //   fov = 40;
+  //   plane = 1;
+  //   far = 800;
+  //
+  //   windowHalfX = window.innerWidth / 2;
+  //   windowHalfY = window.innerHeight / 2;
+  //
+  //   camera = new THREE.PerspectiveCamera(
+  //     fov,
+  //     aspect,
+  //     plane,
+  //     far
+  //   );
+  //
+  //   camera.position.z = far / 2;
+  //
+  //   scene = new THREE.Scene({
+  //     antialias: true
+  //   });
+  //   scene.fog = new THREE.FogExp2(0x1b1b1b, 0.0001);
+  //
+  //   starForge();
+  //
+  //   renderer = new THREE.WebGLRenderer({
+  //     antialias: true,
+  //     alpha: true
+  //   });
+  //   renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
+  //   renderer.setSize(window.innerWidth, window.innerHeight);
+  //   renderer.autoClear = false;
+  //   renderer.setClearColor(0x000000, 0.0);
+  //   containerFake.appendChild(renderer.domElement);
+  //
+  //   document.addEventListener('mousemove', onMouseMove, false);
+  // }
+  //
+  // function animate() {
+  //   requestAnimationFrame(animate);
+  //   render();
+  // }
+  //
+  // function render() {
+  //   camera.position.x += (mouseX - camera.position.x) * 0.005;
+  //   camera.position.y += (-mouseY - camera.position.y) * 0.005;
+  //   camera.lookAt(scene.position);
+  //   renderer.render(scene, camera);
+  // }
+  //
+  // function starForge() {
+  //   var amount = 45000;
+  //   geometry = new THREE.SphereGeometry(1000, 100, 50);
+  //
+  //   materialOptions = {
+  //     color: new THREE.Color(0xffffff),
+  //     size: 1.1,
+  //     transparency: true,
+  //     opacity: 0.8
+  //   };
+  //
+  //   starStuff = new THREE.PointsMaterial(materialOptions);
+  //
+  //
+  //   for (var i = 0; i < amount; i++) {
+  //     var item = new THREE.Vector3();
+  //     item.x = Math.random() * 2000 - 1000;
+  //     item.y = Math.random() * 2000 - 1000;
+  //     item.z = Math.random() * 2000 - 1000;
+  //
+  //     geometry.vertices.push(item);
+  //   }
+  //
+  //   stars = new THREE.PointCloud(geometry, starStuff);
+  //   scene.add(stars);
+  // }
+  //
+  // function onMouseMove(e) {
+  //   mouseX = e.clientX - windowHalfX;
+  //   mouseY = e.clientY - windowHalfY;
+  // }
+
+
+  function signOut() {
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+      window.location.href = "../index.html";
+
+    }, function(error) {
+      window.location.href = "../index.html";
+    });
+  }
+</script>
+
+</html>

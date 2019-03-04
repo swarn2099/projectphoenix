@@ -1,0 +1,48 @@
+.sidenav {
+  width: 100px;
+}
+
+.color-page2 {
+  background: linear-gradient(45deg, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+  position: relative;
+  animation: pastelRainbow 60s ease infinite;
+  background-size: 400% 400%;
+}
+.color-page3 {
+  background: linear-gradient(45deg, #051937, #004d7a, #008793);
+  position: relative;
+  animation: pastelRainbow 30s ease infinite;
+  background-size: 400% 400%;
+}
+body {
+  min-height: 700px;
+  font-family: 'Montserrat';
+
+}
+.card {
+  border-radius: 20px;
+  padding: 0px;
+}
+
+.reduceheight {
+  max-height: 500px;
+  border-radius: 20px;
+  padding: 0px;
+  margin: none;
+}
+label.required::before{
+  content: '*';
+  color: red;
+}
+
+@keyframes pastelRainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

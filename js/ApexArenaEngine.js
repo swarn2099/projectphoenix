@@ -80,7 +80,7 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
 
 
 
-  if (date.data().start == moment().format("MMM Do") && moment().format('h:mm:ss a') == "12:00:00 am") {
+  if (date.data().start == moment().format("MMM Do")) {
     console.log("Date Matches ... lesgo");
     db.collection("apex").get().then(function(querySnapshot) {
       console.log("%c Starting Phoenix Engine...", 'color: teal; font-size: 10px; font-weight: 900; font-family: Arial;');
@@ -143,7 +143,7 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
                       "players": tempArr
                     })
                     .then(function() {
-                      console.log("Difference was found and successfully updated!");
+                      console.log("Difference for ", team.id ,"was found and successfully updated!");
                     });
                 }
               }

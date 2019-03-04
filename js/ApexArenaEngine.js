@@ -80,7 +80,7 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
 
 
 
-  if (date.data().start == moment().format("MMM Do")) {
+  if (date.data().start == moment().format("MMM Do") && moment().format('h:mm:ss a') == "12:00:00 am") {
     console.log("Date Matches ... lesgo");
     db.collection("apex").get().then(function(querySnapshot) {
       console.log("%c Starting Phoenix Engine...", 'color: teal; font-size: 10px; font-weight: 900; font-family: Arial;');
@@ -149,7 +149,7 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
               }
             });
             console.log("Num of teams: ", teamCounter);
-            // $( "#arenaTeams" ).replaceWith('<h3 class="white-text center-align" id="lobbyPlayers">'+teamCounter+' Teams</h3>');
+            $( "#arenaTeams" ).replaceWith('<h3 class="white-text center-align" id="lobbyPlayers">'+teamCounter+' Teams</h3>');
           });
         }
       });

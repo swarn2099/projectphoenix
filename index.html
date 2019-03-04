@@ -80,8 +80,8 @@
     <ul id="nav-mobile" class="right hide-on-small-only">
       <li class="z-depth-0"><a href="#" id="name"></a></li>
       <li class="z-depth-0"><a href="#" id="points"></a></li>
-      <li class="z-depth-0"><a class="waves-effect waves-light btn modal-trigger grey darken-4 white-text" href="#modal1" style="border-radius: 20px;">Sign Up</a></li>
-      <li class="z-depth-0"><a class="waves-effect waves-light btn grey darken-4 white-text" style="border-radius: 20px;">Contact Us</a></li>
+      <li class="z-depth-0"><a class="waves-effect waves-light  modal-trigger white-text" href="#modal1" style="">Sign Up</a></li>
+      <li class="z-depth-0"><a class="waves-effect waves-light white-text" style="" href="https://discord.gg/xXTHqW">Contact Us</a></li>
     </ul>
   </div>
 </nav>
@@ -91,7 +91,6 @@
   <div class="row">
     <div class="col m6 s12">
       <h2 class="white-text hide-on-small-only" style="margin-left: 8%; font-weight: 900;">Apex Arena</h2>
-      <!-- <a class="waves-effect waves-light btn modal-trigger grey darken-4 white-text" href="#modal1" style="border-radius: 20px;">Sign Up</a> -->
       <h3 class="white-text hide-on-med-and-up center-align" style="font-weight: 900;">Apex Arena</h3>
     </div>
     <div class="col m6 s12 center container">
@@ -102,19 +101,35 @@
   <div class="row container hide-on-small-only">
     <div class="col m4 col s12">
       <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px;">
-        <h6 class="white-text center-align show-on-large">Prize Pot</h6>
-        <h3 class="white-text center-align show-on-large">$25</h3>
+        <!-- <h6 class="white-text center-align show-on-large">Instructions</h6> -->
+        <ul class="collapsible grey darken-4" style="border-color: #212121;">
+          <li >
+            <div class="collapsible-header grey darken-4 white-text" style="border-bottom: #212121;"><i class="material-icons">format_list_bulleted</i>Instructions</div>
+            <div class="collapsible-body"><span class="white-text">
+              <ul class="browser-default">
+                <li class="browser-default">Signup by clicking the button above</li>
+                <li class="browser-default">Equip Damage Done data set for one or more of your Legends. These are the ones we will track</li>
+                <li class="browser-default">Once all 3 members of your team have signed up and enabled their Damage, your team card will appear below and we can start recording your scores. </li>
+                <li class="browser-default">Highest damage will get you your points.</li>
+              </ul>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header grey darken-4 white-text" style="border-bottom: #212121;"><i class="material-icons">card_giftcard</i>Prizes</div>
+            <div class="collapsible-body"><span class="white-text">First place will get $15 to distribute amongst themselves</span></div>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="col m4 col s12">
-      <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px;">
+    <div class="col m4 col s12" >
+      <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px; height: 180px;">
         <h6 class="white-text center-align">Teams in Arena</h6>
         <h6 class="white-text center-align" id="arenaTeams"></h6>
       </div>
     </div>
     <div class="col m4 col s12">
-      <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px;">
-        <h6 class="white-text center-align">Time Left</h6>
+      <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px; height: 180px;">
+            <p class="white-text center-align" style="font-weight: 900;">Monday 8 p.m. - Tuesday 8 p.m.</p>
         <h3 class="white-text center-align hide-on-medium" id="countdown"></h3>
         <!-- <h3 class="white-text center-align" id="countdown"></h3> -->
 
@@ -248,6 +263,9 @@
                     <label for="teamName">Enter Team Name</label>
                   </div>
                 </div>
+                <blockquote>
+                  <a href="https://discord.gg/xXTHqW"> Join our Discord </a>
+                </blockquote>
                 <div class="row">
                   <div class="center"><a class="waves-effect waves-light btn z-depth-5" style="background-color: #9F3A3E; border-radius: 15px;" onclick="signup()">Ready to Jump</a></div>
                 </div>

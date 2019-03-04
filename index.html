@@ -240,9 +240,18 @@ function signup() {
   })
   .then(function() {
       console.log("Document successfully written!");
+      M.toast({
+        html: "You're all set :)",
+        classes: 'rounded green white-text'
+      });
+
   })
   .catch(function(error) {
       console.error("Error writing document: ", error);
+      M.toast({
+        html: "Something went wrong :(",
+        classes: 'rounded red white-text'
+      });
   });
 }
 

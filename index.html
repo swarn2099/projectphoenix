@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="collegium">
-  <title>Apex Arena | Project Phoenix</title>
+  <title>Project Phoenix Apex Engine</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -77,7 +77,7 @@
 <nav class="transparent z-depth-0">
   <div class="nav-wrapper black-text">
     <a href="gaming.html" class="brand-logo left " style="padding-left: 2%;"><span class="white-text text-lighten-2" style="font-weight: 900; font-size: 35px;"><b>Project Phoenix</b></span></a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <ul id="nav-mobile" class="right hide-on-small-only">
       <li class="z-depth-0"><a href="#" id="name"></a></li>
       <li class="z-depth-0"><a href="#" id="points"></a></li>
       <li class="z-depth-0"><a class="waves-effect waves-light btn modal-trigger grey darken-4 white-text" href="#modal1" style="border-radius: 20px;">Sign Up</a></li>
@@ -91,30 +91,33 @@
   <div class="row">
     <div class="col m6 s12">
       <h2 class="white-text hide-on-small-only" style="margin-left: 8%; font-weight: 900;">Apex Arena</h2>
+      <!-- <a class="waves-effect waves-light btn modal-trigger grey darken-4 white-text" href="#modal1" style="border-radius: 20px;">Sign Up</a> -->
       <h3 class="white-text hide-on-med-and-up center-align" style="font-weight: 900;">Apex Arena</h3>
     </div>
     <div class="col m6 s12 center container">
       <a class="waves-effect waves-light btn modal-trigger white-text hide-on-med-and-up container z-depth-3 hoverable" href="#modal1" style="border-radius: 20px; width: 100%; background-color: #9F3A3E;">Sign Up</a>
     </div>
   </div>
-  <hr color="white"/>
-  <div class="row container">
+  <hr color="white" />
+  <div class="row container hide-on-small-only">
     <div class="col m4 col s12">
       <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px;">
-        <h6 class="white-text center-align">Prize Pot</h6>
-        <h3 class="white-text center-align">$25</h3>
+        <h6 class="white-text center-align show-on-large">Prize Pot</h6>
+        <h3 class="white-text center-align show-on-large">$25</h3>
       </div>
     </div>
     <div class="col m4 col s12">
       <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px;">
         <h6 class="white-text center-align">Teams in Arena</h6>
-        <h3 class="white-text center-align" id="arenaTeams"></h3>
+        <h6 class="white-text center-align" id="arenaTeams"></h6>
       </div>
     </div>
     <div class="col m4 col s12">
       <div class="card-panel grey darken-4 z-depth-5" style="border-radius: 15px;">
         <h6 class="white-text center-align">Time Left</h6>
-        <h3 class="white-text center-align" id="countdown"></h3>
+        <h3 class="white-text center-align hide-on-medium" id="countdown"></h3>
+        <!-- <h3 class="white-text center-align" id="countdown"></h3> -->
+
       </div>
     </div>
   </div>
@@ -139,69 +142,114 @@
     </div>
   </section>
   <!-- Modal Structure -->
-  <div id="modal1" class="modal bottom-sheet" style="min-height: 75%; background-color: #9F3A3E;">
+  <div id="modal1" class="modal bottom-sheet" style="min-height: 100%;  background-color: #9F3A3E;">
     <div class="modal-content">
-      <h3 style="font-weight: 900;" class="center-align white-text">Sign Up for Apex Arena</h3>
+      <div class="row">
+        <div class="col m4"></div>
+        <div class="col m4">
+          <h3 style="font-weight: 900;" class="center-align white-text hide-on-small-only">Register</h3>
+          <!-- <h5 style="font-weight: 900;" class="center-align white-text ">Sign Up for Apex Arena</h5> -->
+        </div>
+        <div class="col m4">
+          <p class="white-text right-align hide-on-med-and-down">Press ESC to dismiss form</p>
+        </div>
+      </div>
+      <hr color="white" />
+      <br><br>
       <div class="row container">
-        <div class="col m6 s12">
-          <div class="card-panel grey darken-4 z-depth-5" style="padding: 30px; border-radius: 15px;">
-            <h5 class="white-text center-align">Step 1</h5>
+        <div class="col m12 s12 ">
+          <div class="card-panel white z-depth-5" style="padding: 30px; border-radius: 15px;">
+            <h4 class="black-text left-align" style="font-weight: 900;">Personal Information</h4>
+            <br>
             <div class="row">
               <form class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="apexName" type="text" class="validate white-text">
+                    <input id="apexName" type="text" class="validate black-text">
                     <label for="apexName">Apex Name</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="email" type="email" class="validate white-text">
+                    <input id="email" type="email" class="validate black-text">
                     <label for="email">Email</label>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s12 white-text" >
-                    <select class="white-text" id="platform">
-                      <option value="1" class="white-text" style="color: white;">Xbox</option>
+                  <div class="input-field col s6 black-text">
+                    <select id="platform">
+                      <option value="1" style="color: white;">Xbox</option>
                       <option value="2" class="white-text">PS4</option>
                       <option value="5" class="white-text">PC</option>
                     </select>
-                    <label class="white-txt">Select Platform</label>
+                    <label class="black-text">Select Platform</label>
                     <br>
+                  </div>
+                  <div class="input-field col s6">
+                    <input id="twitch" type="text" class="validate black-text">
+                    <label for="twitch">Twitch</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input id="venmo" type="text" class="black-text">
+                    <label for="venmo">Venmo</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input id="discord" type="text" class="validate black-text">
+                    <label for="discord">Discord</label>
                   </div>
                 </div>
               </form>
             </div>
+            <blockquote style="font-weight: 900;">
+              If you don't have a team, create one in the card below and click <b>Create Team.</b> <br>Your teamates dont have to fill out that section but they will have to enter the team name in the Team Confirmation section.
+            </blockquote>
           </div>
         </div>
-        <div class="col m6 s12">
-          <div class="card-panel grey darken-4 z-depth-5" style="padding: 30px; border-radius: 15px;">
-            <h5 class="white-text center-align">Step 2</h5>
+        <div class="col m12 s12">
+          <div class="card-panel white z-depth-5" style="padding: 30px; border-radius: 15px;">
+            <h4 class="black-text left-align" style="font-weight: 900;">Team Setup</h4><br>
+            <blockquote>
+              If you have a team already, skip to next card :)
+            </blockquote>
             <div class="row">
               <form class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="teamNameCreate" type="text" class="validate white-text">
+                    <input id="teamNameCreate" type="text" class="validate black-text">
                     <label for="teamNameCreate">Enter Team Name</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="banner" type="text" class="validate white-text">
+                    <input id="banner" type="text" class="validate black-text">
                     <label for="banner">Team Logo Image Link</label>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s6">
-                    <input id="venmo" type="text" class="validate white-text">
-                    <label for="venmo">Venmo</label>
+                  <div class="center"><a class="waves-effect waves-light btn z-depth-5" style="background-color: #9F3A3E; border-radius: 15px;" onclick="createTeam()">Create Team</a></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col m12 s12">
+          <div class="card-panel whitez-depth-5" style="padding: 30px; border-radius: 15px;">
+            <h4 class="black-text left-align" style="font-weight: 900;">Team Confirmation</h4><br>
+            <blockquote>
+              Enter your team name. If you just created your team, you still have to do this. <br>Remember to type is up exactly as it was created otherwise there will be an error.
+            </blockquote>
+            <div class="row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="teamName" type="text" class="validate black-text">
+                    <label for="teamName">Enter Team Name</label>
                   </div>
-                  <div class="input-field col s6">
-                    <input id="discord" type="text" class="validate white-text">
-                    <label for="discord">Discord</label>
-                  </div>
-                  <div class="center"><a class="waves-effect waves-light btn z-depth-5" style="background-color: #9F3A3E; border-radius: 15px;" onclick="signup()">Submit</a></div>
+                </div>
+                <div class="row">
+                  <div class="center"><a class="waves-effect waves-light btn z-depth-5" style="background-color: #9F3A3E; border-radius: 15px;" onclick="signup()">Ready to Jump</a></div>
                 </div>
               </form>
             </div>
@@ -213,47 +261,62 @@
 </body>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script>
-function signup() {
-  var email = document.getElementById('email').value;
-  var teamName = document.getElementById('teamNameCreate').value;
-  db.collection("apexLobby").doc(email).set({
-      addedToTeam: false,
-      email: email,
-      name: document.getElementById('apexName').value,
-      platform: document.getElementById('platform').value,
-      teamName: teamName,
-      venmo: document.getElementById('venmo').value
-  })
-  .then(function() {
-      console.log("Document successfully written!");
-  })
-  .catch(function(error) {
-      console.error("Error writing document: ", error);
-  });
-  db.collection("apex").doc(teamName).set({
-      banner: document.getElementById('banner').value,
-      damageTotal: 0,
-      initialized: false,
-      players: [],
-      teamName: teamName,
-      teamReady: false
-  })
-  .then(function() {
-      console.log("Document successfully written!");
-      M.toast({
-        html: "You're all set :)",
-        classes: 'rounded green white-text'
+  function signup() {
+    var email = document.getElementById('email').value;
+    var teamName = document.getElementById('teamName').value;
+    var platform = document.getElementById('platform').value;
+    db.collection("apexLobby").doc(email).set({
+        addedToTeam: false,
+        email: email,
+        name: document.getElementById('apexName').value,
+        platform: parseInt(platform, 10),
+        teamName: teamName,
+        venmo: document.getElementById('venmo').value,
+        twitch: document.getElementById('twitch').value,
+        discord: document.getElementById('discord').value
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+        M.toast({
+          html: "You've regitered. Good luck' :)",
+          classes: 'rounded green white-text'
+        });
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+        M.toast({
+          html: "Something went wrong. Try again or contact us :()",
+          classes: 'rounded red white-text'
+        });
       });
+  }
 
-  })
-  .catch(function(error) {
-      console.error("Error writing document: ", error);
-      M.toast({
-        html: "Something went wrong :(",
-        classes: 'rounded red white-text'
+  function createTeam() {
+    var teamNameCreate = document.getElementById('teamNameCreate').value;
+    db.collection("apex").doc(teamNameCreate).set({
+        banner: document.getElementById('banner').value,
+        damageTotal: 0,
+        initialized: false,
+        teamName: teamNameCreate,
+        players: [],
+        teamReady: false
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+        M.toast({
+          html: "You've created a team :)",
+          classes: 'rounded green white-text'
+        });
+
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+        M.toast({
+          html: "Something went wrong :( Try a different name?",
+          classes: 'rounded red white-text'
+        });
       });
-  });
-}
-
+  }
 </script>
+
 </html>

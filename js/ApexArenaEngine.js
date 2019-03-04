@@ -9,19 +9,12 @@ db.collection("apexLobby").get().then(function(querySnapshot) {
     // doc.data() is never undefined for query doc snapshots
     console.log("%c Entering the lobby...", 'color: blue; font-size: 10px; font-weight: 900; font-family: Arial;');
     console.log(lobby.id, " => ", lobby.data());
-    if(lobby.data().platform == 'XBOX'){
-      platform = 1;
-    }else if(lobby.data().platform == "PS4"){
-      platform = 2;
-    }else{
-      platform = 5;
-    }
 
-    if(lobby.data().addedToTeam == "false"){
+    if(lobby.data().addedToTeam == false){
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": 'https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/apex/v1/standard/profile/' + platform + '/' + lobby.data().name,
+        "url": 'https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/apex/v1/standard/profile/' + lobby.data().platform + '/' + lobby.data().name,
         "method": "GET",
         "headers": {
           "TRN-Api-Key": "1a753f25-4dce-4936-8092-554a2b44b927",
@@ -37,9 +30,11 @@ db.collection("apexLobby").get().then(function(querySnapshot) {
             name: lobby.data().name,
             difference: 0,
             overallDamage: 0,
-            platform: platform,
+            platform: lobby.data().platform,
             twitch: lobby.data().twitch,
-          }
+            discord: lobby.data().discord,
+            venmo: lobby.data().venmo,
+          };
           db.collection('apex').doc(lobby.data().teamName).update({
             players: firebase.firestore.FieldValue.arrayUnion(addPlayer)
           });
@@ -164,19 +159,20 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
   }
   db.collection("apex").orderBy("damageTotal", "desc").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
+      if(doc.data().players.length == 3){
+        var teamDamage = doc.data().players[0].difference + doc.data().players[1].difference + doc.data().players[2].difference;
 
-      var teamDamage = doc.data().players[0].difference + doc.data().players[1].difference + doc.data().players[2].difference;
+        var teamCard = '<div class="card horizontal transparent z-depth-5 hoverable" style="height: 150px;"><div class="card-image"><img style="border-radius: 15px 0px 0px 15px; height: 150px; width: 200px;" src="' + doc.data().banner + '"></div><div class="card-stacked"><div class="card-content grey darken-4" style="border-radius: 0px 15px 15px 0px; padding: 10px; padding-top: 0px; padding-bottom: 0px;"><div class="row container"><div class="col m6 push-m1"><h5 class="white-text left-align"> Team ' + doc.data().teamName + ' </h5></div><div class="col m6 push-m5"><h4 class="white-text right-align"> ' + teamDamage + ' PTS</h4></div></div><div class="row" style="margin-top: -1%;"><div class="col m4 hoverable"><p class="white-text center-align" style="font-size: 15px;"> ' + doc.data().players[0].difference + ' PTS</p><p class="white-text center-align" style="font-size: 12px;"> ' + doc.data().players[0].name + '</p></div><div class="col m4 hoverable "><p class="white-text center-align" style="font-size: 15px;"> ' + doc.data().players[1].difference + ' PTS</p><p class="white-text center-align" style="font-size: 12px;"> ' + doc.data().players[1].name + '</p></div><div class="col m4 hoverable"><p class="white-text center-align" style="font-size: 15px;"> ' + doc.data().players[2].difference + ' PTS</p><p class="white-text center-align" style="font-size: 12px;"> ' + doc.data().players[2].name + '</p></div></div></div></div></div>';
+        $('#teamSection').append(teamCard);
+        $('.progress').hide();
 
-      var teamCard = '<div class="card horizontal transparent z-depth-5 hoverable" style="height: 150px;"><div class="card-image"><img style="border-radius: 15px 0px 0px 15px; height: 150px; width: 200px;" src="' + doc.data().banner + '"></div><div class="card-stacked"><div class="card-content grey darken-4" style="border-radius: 0px 15px 15px 0px; padding: 10px; padding-top: 0px; padding-bottom: 0px;"><div class="row container"><div class="col m6 push-m1"><h5 class="white-text left-align"> Team ' + doc.data().teamName + ' </h5></div><div class="col m6 push-m5"><h4 class="white-text right-align"> ' + teamDamage + ' PTS</h4></div></div><div class="row" style="margin-top: -1%;"><div class="col m4 hoverable"><p class="white-text center-align" style="font-size: 15px;"> ' + doc.data().players[0].difference + ' PTS</p><p class="white-text center-align" style="font-size: 12px;"> ' + doc.data().players[0].name + '</p></div><div class="col m4 hoverable "><p class="white-text center-align" style="font-size: 15px;"> ' + doc.data().players[1].difference + ' PTS</p><p class="white-text center-align" style="font-size: 12px;"> ' + doc.data().players[1].name + '</p></div><div class="col m4 hoverable"><p class="white-text center-align" style="font-size: 15px;"> ' + doc.data().players[2].difference + ' PTS</p><p class="white-text center-align" style="font-size: 12px;"> ' + doc.data().players[2].name + '</p></div></div></div></div></div>';
-      $('#teamSection').append(teamCard);
-      $('.progress').hide();
-
-      db.collection("apex").doc(doc.id).update({
-          "damageTotal": teamDamage
-        })
-        .then(function() {
-          // console.log("Document successfully updated!");
-        });
+        db.collection("apex").doc(doc.id).update({
+            "damageTotal": teamDamage
+          })
+          .then(function() {
+            // console.log("Document successfully updated!");
+          });
+      }
     });
   });
 });

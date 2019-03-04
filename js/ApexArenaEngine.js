@@ -94,7 +94,7 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
         teamCounter += 1;
         var tempArr = [];
         var initArr = [];
-        if (team.data().players.length = 3) {
+        if (team.data().players.length == 3) {
           team.data().players.forEach(function(player) {
             // console.log(player);idk if this is working
             var settings = {

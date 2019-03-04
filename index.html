@@ -149,13 +149,9 @@
             <div class="row">
               <form class="col s12">
                 <div class="row">
-                  <div class="input-field col s6">
-                    <input id="first_name" type="text" class="validate white-text">
-                    <label for="first_name">First Name</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate white-text">
-                    <label for="last_name">Last Name</label>
+                  <div class="input-field col s12">
+                    <input id="apexName" type="text" class="validate white-text">
+                    <label for="apexName">Apex Name</label>
                   </div>
                 </div>
                 <div class="row">
@@ -165,9 +161,9 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s12">
-                    <select class="white-text">
-                      <option value="1" class="white-text">Xbox</option>
+                  <div class="input-field col s12 white-text" >
+                    <select class="white-text" id="platform">
+                      <option value="1" class="white-text" style="color: white;">Xbox</option>
                       <option value="2" class="white-text">PS4</option>
                       <option value="5" class="white-text">PC</option>
                     </select>
@@ -186,27 +182,26 @@
               <form class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
-                    <select class="white-text" id="teamNames">
-                    </select>
-                    <label class="white-txt">Select Platform</label>
+                    <input id="teamNameCreate" type="text" class="validate white-text">
+                    <label for="teamNameCreate">Enter Team Name</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="email" type="text" class="validate">
-                    <label for="email">Team Logo Image Link</label>
+                    <input id="banner" type="text" class="validate white-text">
+                    <label for="banner">Team Logo Image Link</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s6">
-                    <input id="first_name" type="text" class="validate white-text">
-                    <label for="first_name">Venmo</label>
+                    <input id="venmo" type="text" class="validate white-text">
+                    <label for="venmo">Venmo</label>
                   </div>
                   <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate white-text">
-                    <label for="last_name">Discord</label>
+                    <input id="discord" type="text" class="validate white-text">
+                    <label for="discord">Discord</label>
                   </div>
-                  <div class="center"><a class="waves-effect waves-light btn z-depth-5" style="background-color: #9F3A3E; border-radius: 15px;">Submit</a></div>
+                  <div class="center"><a class="waves-effect waves-light btn z-depth-5" style="background-color: #9F3A3E; border-radius: 15px;" onclick="signup()">Submit</a></div>
                 </div>
               </form>
             </div>
@@ -217,4 +212,39 @@
   </div>
 </body>
 <script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+function signup() {
+  var email = document.getElementById('email').value;
+  var teamName = document.getElementById('teamNameCreate').value;
+  db.collection("apexLobby").doc(email).set({
+      addedToTeam: false,
+      email: email,
+      name: document.getElementById('apexName').value,
+      platform: document.getElementById('platform').value,
+      teamName: teamName,
+      venmo: document.getElementById('venmo').value
+  })
+  .then(function() {
+      console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+      console.error("Error writing document: ", error);
+  });
+  db.collection("apex").doc(teamName).set({
+      banner: document.getElementById('banner').value,
+      damageTotal: 0,
+      initialized: false,
+      players: [],
+      teamName: teamName,
+      teamReady: false
+  })
+  .then(function() {
+      console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+      console.error("Error writing document: ", error);
+  });
+}
+
+</script>
 </html>

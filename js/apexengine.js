@@ -80,7 +80,7 @@ db.collection("apex").get().then(function(querySnapshot) {
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       // Display the result in the element with id="demo"
-      document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+      document.getElementById("countdown").innerHTML = hours + "h "
       + minutes + "m " + seconds + "s ";
 
       // If the count down is finished, write some text

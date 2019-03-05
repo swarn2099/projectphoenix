@@ -80,83 +80,83 @@ db.collection('tournaments').doc('apexarena').get().then(function(date) {
 
 
 
-  if (date.data().start == moment().format("MMM Do")) {
-    console.log("Date Matches ... lesgo");
-    db.collection("apex").get().then(function(querySnapshot) {
-      console.log("%c Starting Phoenix Engine...", 'color: teal; font-size: 10px; font-weight: 900; font-family: Arial;');
-      querySnapshot.forEach(function(team) {
-        // console.log(team.id, "=>", team.data());
-        teamCounter += 1;
-        var tempArr = [];
-        var initArr = [];
-        if (team.data().players.length == 3) {
-          team.data().players.forEach(function(player) {
-            // console.log(player);idk if this is working
-            var settings = {
-              "async": true,
-              "crossDomain": true,
-              "url": 'https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/apex/v1/standard/profile/' + player.platform + '/' + player.name,
-              "method": "GET",
-              "headers": {
-                "TRN-Api-Key": "1a753f25-4dce-4936-8092-554a2b44b927",
-                "cache-control": "no-cache",
-                "Postman-Token": "4c031e3e-695e-47de-b078-6c71a76badf2"
-              }
-            };
-            $.ajax(settings).done(function(apex) {
-              // console.log(apex.data.metadata.platformUserHandle, "=>", apex.data);
-              var damage = apex.data.stats.find(o => o.metadata.key === 'Damage');
-              if (team.data().initialized == false) {
-                console.log("running inital load");
-                player.overallDamage = damage.value;
-                initArr.push(player);
-                if (initArr.length == 3) {
-                  db.collection("apex").doc(team.id).update({
-                      "players": initArr,
-                      initialized: true
-                    })
-                    .then(function() {
-                      console.log("Init successfully updated!");
-                    });
-                }
-              } else {
-                console.log("Running checking system");
-                var difference = (damage.value - player.overallDamage);
-                if (difference > player.difference) {
-                  // console.log("Difference Found...updating player values");
-                  player.difference = difference;
-                  var feedObj = {
-                    name: player.name,
-                    difference: difference,
-                    time: moment().format('h:mm a'),
-                    img: team.data().banner
-                  };
-                  db.collection('tournaments').doc('apexarena').update({
-                    feed: firebase.firestore.FieldValue.arrayUnion(feedObj)
-                  });
-                }
-                player.overallDamage = damage.value;
-                tempArr.push(player);
-                console.log(team.id, "Temp Array is: ", tempArr);
-                if (tempArr.length == 3) {
-                  db.collection("apex").doc(team.id).update({
-                      "players": tempArr
-                    })
-                    .then(function() {
-                      console.log("Difference for ", team.id ,"was found and successfully updated!");
-                    });
-                }
-              }
-            });
-            console.log("Num of teams: ", teamCounter);
-            $( "#arenaTeams" ).replaceWith('<h3 class="white-text center-align" id="lobbyPlayers">'+teamCounter+' Teams</h3>');
-          });
-        }
-      });
-      $( "#arenaTeams" ).replaceWith('<h3 class="white-text center-align" id="lobbyPlayers">'+teamCounter+' Teams</h3>');
-
-    })
-  }
+  // if (date.data().start == moment().format("MMM Do")) {
+  //   console.log("Date Matches ... lesgo");
+  //   db.collection("apex").get().then(function(querySnapshot) {
+  //     console.log("%c Starting Phoenix Engine...", 'color: teal; font-size: 10px; font-weight: 900; font-family: Arial;');
+  //     querySnapshot.forEach(function(team) {
+  //       // console.log(team.id, "=>", team.data());
+  //       teamCounter += 1;
+  //       var tempArr = [];
+  //       var initArr = [];
+  //       if (team.data().players.length == 3) {
+  //         team.data().players.forEach(function(player) {
+  //           // console.log(player);idk if this is working
+  //           var settings = {
+  //             "async": true,
+  //             "crossDomain": true,
+  //             "url": 'https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/apex/v1/standard/profile/' + player.platform + '/' + player.name,
+  //             "method": "GET",
+  //             "headers": {
+  //               "TRN-Api-Key": "1a753f25-4dce-4936-8092-554a2b44b927",
+  //               "cache-control": "no-cache",
+  //               "Postman-Token": "4c031e3e-695e-47de-b078-6c71a76badf2"
+  //             }
+  //           };
+  //           $.ajax(settings).done(function(apex) {
+  //             // console.log(apex.data.metadata.platformUserHandle, "=>", apex.data);
+  //             var damage = apex.data.stats.find(o => o.metadata.key === 'Damage');
+  //             if (team.data().initialized == false) {
+  //               console.log("running inital load");
+  //               player.overallDamage = damage.value;
+  //               initArr.push(player);
+  //               if (initArr.length == 3) {
+  //                 db.collection("apex").doc(team.id).update({
+  //                     "players": initArr,
+  //                     initialized: true
+  //                   })
+  //                   .then(function() {
+  //                     console.log("Init successfully updated!");
+  //                   });
+  //               }
+  //             } else {
+  //               console.log("Running checking system");
+  //               var difference = (damage.value - player.overallDamage);
+  //               if (difference > player.difference) {
+  //                 // console.log("Difference Found...updating player values");
+  //                 player.difference = difference;
+  //                 var feedObj = {
+  //                   name: player.name,
+  //                   difference: difference,
+  //                   time: moment().format('h:mm a'),
+  //                   img: team.data().banner
+  //                 };
+  //                 db.collection('tournaments').doc('apexarena').update({
+  //                   feed: firebase.firestore.FieldValue.arrayUnion(feedObj)
+  //                 });
+  //               }
+  //               player.overallDamage = damage.value;
+  //               tempArr.push(player);
+  //               console.log(team.id, "Temp Array is: ", tempArr);
+  //               if (tempArr.length == 3) {
+  //                 db.collection("apex").doc(team.id).update({
+  //                     "players": tempArr
+  //                   })
+  //                   .then(function() {
+  //                     console.log("Difference for ", team.id ,"was found and successfully updated!");
+  //                   });
+  //               }
+  //             }
+  //           });
+  //           console.log("Num of teams: ", teamCounter);
+  //           $( "#arenaTeams" ).replaceWith('<h3 class="white-text center-align" id="lobbyPlayers">'+teamCounter+' Teams</h3>');
+  //         });
+  //       }
+  //     });
+  //     $( "#arenaTeams" ).replaceWith('<h3 class="white-text center-align" id="lobbyPlayers">'+teamCounter+' Teams</h3>');
+  //
+  //   })
+  // }
   db.collection("apex").orderBy("damageTotal", "desc").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
       if(doc.data().players.length == 3){

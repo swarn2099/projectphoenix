@@ -80,7 +80,7 @@ $(document).ready(function() {
 
       // Display the result in the element with id="demo"
       document.getElementById("countdown").innerHTML = days + "d " + hours + "h " +
-        minutes + "m " + seconds + "s ";
+        minutes + "m ";
 
       // If the count down is finished, write some text
       if (distance < 0) {

@@ -34,7 +34,7 @@ $(document).ready(function() {
           success: function(response) {
             if (response.stream.stream_type == "live") {
               console.log("EVERYTHING IS GUCCI");
-              var liveCard = '<section style="background-color: #2E3353; border-radius: 50px;" class="z-depth-5 hoverable"><div class="row"><div class="col m4"><img src="' + response.stream.preview.large + '" alt="" class="circle responsive-img z-depth-5" style="margin-top: 5%; margin-left: 15px; height: 40px; width: 40px;"></div><div class="col m5 pull-m2"><h6 class="white-text" style="margin-top: 10%;">' + player.name + ' went live</h6></div><div class="col m3 pull-m2" style="margin-top: 2%;"><a href="' + response.stream.channel.url + '" class="waves-effect waves-light btn" style="border-radius: 20px; background-color: #171C2F; width: 150px;">Watch Now</a></div></div></section>';
+              var liveCard = '<section style="background-color: #2E3353; border-radius: 50px;" class="z-depth-5 hoverable"><div class="row"><div class="col m4"><img src="' + response.stream.preview.large + '" alt="" class="circle responsive-img z-depth-5" style="margin-top: 5%; margin-left: 15px; height: 40px; width: 40px;"></div><div class="col m5 pull-m2"><h6 class="white-text" style="margin-top: 10%;">' + player.name + ' is live</h6></div><div class="col m3 pull-m2" style="margin-top: 2%;"><a href="' + response.stream.channel.url + '" class="waves-effect waves-light btn" style="border-radius: 20px; background-color: #171C2F;">Watch</a></div></div></section>';
               $('#liveNow').append(liveCard);
             }
           }
